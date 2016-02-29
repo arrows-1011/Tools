@@ -9,8 +9,7 @@
 #include <time.h>
 
 
-class User
-{
+class User {
   private:
     std::string id;
     std::string name;
@@ -19,7 +18,7 @@ class User
     std::set<std::string> solved_list;
 
   public:
-    User(){
+    User() {
         id          = "";
         name        = "";
         affiliation = "";
@@ -31,7 +30,7 @@ class User
            std::string name,
            std::string affiliation,
            std::string solved,
-           std::set<std::string> solved_list){
+           std::set<std::string> solved_list) {
 
         this->id          = id;
         this->name        = name;
@@ -40,7 +39,7 @@ class User
         this->solved_list = solved_list;
     }
 
-    bool operator < (const User &user)const{
+    bool operator < (const User &user)const {
         if (solved != user.solved) {
             return solved < user.solved;
         }
@@ -59,47 +58,58 @@ class User
         return 0;
     }
 
-    void setID(std::string id){
+    void setID(std::string id)
+    {
         this->id = id;
     }
 
-    std::string getID(void){
+    std::string getID(void)
+    {
         return id;
     }
 
-    void setName(std::string name){
+    void setName(std::string name)
+    {
         this->name = name;
     }
 
-    std::string getName(void){
+    std::string getName(void)
+    {
         return name;
     }
 
-    void setAffiliation(std::string affiliation){
+    void setAffiliation(std::string affiliation)
+    {
         this->affiliation = affiliation;
     }
 
-    std::string getAffiliation(void){
+    std::string getAffiliation(void)
+    {
         return affiliation;
     }
 
-    void setSolved(std::string solved){
+    void setSolved(std::string solved)
+    {
         this->solved = solved;
     }
 
-    std::string getSolved(void){
+    std::string getSolved(void)
+    {
         return solved;
     }
 
-    void setSolvedList(std::set<std::string> solved_list){
+    void setSolvedList(std::set<std::string> solved_list)
+    {
         this->solved_list = solved_list;
     }
 
-    std::set<std::string> getSolvedList(void){
+    std::set<std::string> getSolvedList(void)
+    {
         return solved_list;
     }
 
-    void displayInfo(void){
+    void displayInfo(void)
+    {
         std::cout << "           ID : " << id << std::endl;
         std::cout << "         Name : " << name << std::endl;
         std::cout << "  Affiliation : " << affiliation << std::endl;

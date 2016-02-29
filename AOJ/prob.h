@@ -5,14 +5,13 @@
 #include <string>
 
 
-class Prob
-{
+class Prob {
   private:
     std::string id, name;
     std::string TL, sub, AC, WA, TLE, MLE, RE;
 
   public:
-    Prob(){
+    Prob() {
         id   = "";
         name = "";
         TL   = "";
@@ -32,7 +31,7 @@ class Prob
          std::string WA,
          std::string TLE,
          std::string MLE,
-         std::string RE){
+         std::string RE) {
 
         this->id   = id;
         this->name = name;
@@ -45,7 +44,7 @@ class Prob
         this->RE   = RE;
     }
 
-    bool operator < (const Prob p)const{
+    bool operator < (const Prob p)const {
         if (id != p.id) {
             return id < p.id;
         }
@@ -57,19 +56,23 @@ class Prob
         return 0;
     }
 
-    void setID(std::string id){
+    void setID(std::string id)
+    {
         this->id = id;
     }
 
-    std::string getID(void){
+    std::string getID(void)
+    {
         return id;
     }
 
-    void setName(std::string name){
+    void setName(std::string name)
+    {
         this->name = name;
     }
 
-    std::string getName(void){
+    std::string getName(void)
+    {
         return name;
     }
 
@@ -79,7 +82,8 @@ class Prob
                  std::string WA,
                  std::string TLE,
                  std::string MLE,
-                 std::string RE){
+                 std::string RE)
+    {
 
         this->TL  = TL;
         this->sub = sub;
@@ -90,35 +94,43 @@ class Prob
         this->RE  = RE;
     }
 
-    std::string getTL(void){
+    std::string getTL(void)
+    {
         return TL;
     }
 
-    std::string getSub(void){
+    std::string getSub(void)
+    {
         return sub;
     }
 
-    std::string getAC(void){
+    std::string getAC(void)
+    {
         return AC;
     }
 
-    std::string getWA(void){
+    std::string getWA(void)
+    {
         return WA;
     }
 
-    std::string getTLE(void){
+    std::string getTLE(void)
+    {
         return TLE;
     }
 
-    std::string getMLE(void){
+    std::string getMLE(void)
+    {
         return MLE;
     }
 
-    std::string getRE(void){
+    std::string getRE(void)
+    {
         return RE;
     }
 
-    void displayInfo(void){
+    void displayInfo(void)
+    {
         std::cout << "   ID : " + id << std::endl;
         std::cout << " Name : " + name << std::endl;
         std::cout << "   TL : " + TL << std::endl;
