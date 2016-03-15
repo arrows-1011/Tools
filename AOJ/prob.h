@@ -56,33 +56,33 @@ class Prob {
         return 0;
     }
 
-    void setID(std::string id)
+    void set_id(std::string id)
     {
         this->id = id;
     }
 
-    std::string getID(void)
+    std::string get_id(void)
     {
         return id;
     }
 
-    void setName(std::string name)
+    void set_name(std::string name)
     {
         this->name = name;
     }
 
-    std::string getName(void)
+    std::string get_name(void)
     {
         return name;
     }
 
-    void setInfo(std::string TL,
-                 std::string sub,
-                 std::string AC,
-                 std::string WA,
-                 std::string TLE,
-                 std::string MLE,
-                 std::string RE)
+    void set_info(std::string TL,
+                  std::string sub,
+                  std::string AC,
+                  std::string WA,
+                  std::string TLE,
+                  std::string MLE,
+                  std::string RE)
     {
 
         this->TL  = TL;
@@ -94,58 +94,58 @@ class Prob {
         this->RE  = RE;
     }
 
-    std::string getTL(void)
+    std::string get_TL(void)
     {
         return TL;
     }
 
-    std::string getSub(void)
+    std::string get_sub(void)
     {
         return sub;
     }
 
-    std::string getAC(void)
+    std::string get_AC(void)
     {
         return AC;
     }
 
-    std::string getWA(void)
+    std::string get_WA(void)
     {
         return WA;
     }
 
-    std::string getTLE(void)
+    std::string get_TLE(void)
     {
         return TLE;
     }
 
-    std::string getMLE(void)
+    std::string get_MLE(void)
     {
         return MLE;
     }
 
-    std::string getRE(void)
+    std::string get_RE(void)
     {
         return RE;
     }
 
-    void displayInfo(void)
+    void display_problem_info(void)
     {
-        std::cout << "   ID : " + id << std::endl;
+        std::cout << "   ID : " + id   << std::endl;
         std::cout << " Name : " + name << std::endl;
-        std::cout << "   TL : " + TL << std::endl;
-        std::cout << "  sub : " + sub << std::endl;
-        std::cout << "   AC : " + AC << std::endl;
-        std::cout << "   WA : " + WA << std::endl;
-        std::cout << "  TLE : " + TLE << std::endl;
-        std::cout << "  MLE : " + MLE << std::endl;
-        std::cout << "   RE : " + RE << std::endl;
+        std::cout << "   TL : " + TL   << std::endl;
+        std::cout << "  sub : " + sub  << std::endl;
+        std::cout << "   AC : " + AC   << std::endl;
+        std::cout << "   WA : " + WA   << std::endl;
+        std::cout << "  TLE : " + TLE  << std::endl;
+        std::cout << "  MLE : " + MLE  << std::endl;
+        std::cout << "   RE : " + RE   << std::endl;
     }
 };
 
-extern Prob parse4Problem(std::string);
-extern Prob problemSearchAPI(std::string);
-extern std::set<std::string> findRecommendProblems(std::string);
+extern Prob parse_4_problem(std::string);
+extern Prob problem_search_API(std::string);
+extern std::set<std::string> find_recommend_problems(std::string);
 
-extern std::set<std::string> getProbList(std::string);
+extern std::set<std::string> get_problist(std::string);
 extern std::string query(std::string);

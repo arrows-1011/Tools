@@ -7,6 +7,8 @@
 #include <string>
 #include <sys/time.h>
 #include <time.h>
+#include <unistd.h>
+#include <vector>
 
 
 class User {
@@ -58,57 +60,57 @@ class User {
         return 0;
     }
 
-    void setID(std::string id)
+    void set_id(std::string id)
     {
         this->id = id;
     }
 
-    std::string getID(void)
+    std::string get_id(void)
     {
         return id;
     }
 
-    void setName(std::string name)
+    void set_name(std::string name)
     {
         this->name = name;
     }
 
-    std::string getName(void)
+    std::string get_name(void)
     {
         return name;
     }
 
-    void setAffiliation(std::string affiliation)
+    void set_affiliation(std::string affiliation)
     {
         this->affiliation = affiliation;
     }
 
-    std::string getAffiliation(void)
+    std::string get_affiliation(void)
     {
         return affiliation;
     }
 
-    void setSolved(std::string solved)
+    void set_solved(std::string solved)
     {
         this->solved = solved;
     }
 
-    std::string getSolved(void)
+    std::string get_solved(void)
     {
         return solved;
     }
 
-    void setSolvedList(std::set<std::string> solved_list)
+    void set_solvedlist(std::set<std::string> solved_list)
     {
         this->solved_list = solved_list;
     }
 
-    std::set<std::string> getSolvedList(void)
+    std::set<std::string> get_solvedlist(void)
     {
         return solved_list;
     }
 
-    void displayInfo(void)
+    void display_user_info(void)
     {
         std::cout << "           ID : " << id << std::endl;
         std::cout << "         Name : " << name << std::endl;
@@ -129,11 +131,13 @@ class User {
     }
 };
 
-extern User parse4User(std::string);
-extern User userSearchAPI(std::string);
-extern std::set<User> parse4Users(std::string);
-extern std::set<User> allUserListSearchAPI(std::string, std::string, std::string, std::string);
-extern double differenceProblems(User, User);
-extern std::set<User> getSimilarUsers(User);
+extern User parse_4_user(std::string);
+extern User user_search_API(std::string);
+extern std::set<User> parse_4_users(std::string);
+extern std::set<User> all_userlist_search_API(std::string, std::string, std::string, std::string);
+extern void common_solved_problems(std::vector<User>);
+extern double difference_problems(std::string, std::string);
+extern double difference_problems(User, User);
+extern std::set<User> get_similar_users(User);
 
-extern std::string query (std::string);
+extern std::string query(std::string);
