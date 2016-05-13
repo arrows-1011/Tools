@@ -1,3 +1,8 @@
+#include <iostream>
+#include <regex>
+#include <sstream>
+#include <unistd.h>
+
 #include "user.h"
 #include "prob.h"
 
@@ -5,7 +10,7 @@
 // Check user id is valid or not.
 // id can use characters alphabet, numbers(0 to 9),
 // and under bar.
-bool valid_user_id(std::string id)
+bool validUserID(std::string id)
 {
     std::regex pattern("[a-zA-Z0-9_]+");
     return std::regex_match(id, pattern);
@@ -13,9 +18,9 @@ bool valid_user_id(std::string id)
 
 // User Search API in AOJ
 // Obtain detailed information of the specific user.
-User user_search_API(std::string id)
+User userSearchAPI(std::string id)
 {
-    if (!valid_user_id(id)) {
+    if (!validUserID(id)) {
         std::cerr << "Error: Invalid user id" << std::endl;
         exit(1);
     }
@@ -26,11 +31,11 @@ User user_search_API(std::string id)
     url += id;
 
     std::string xml = query(url);
-    User user = parse_4_user(xml);
+    User user = parse4User(xml);
     return user;
 }
 
-User parse_4_user(std::string xml)
+User parse4User(std::string xml)
 {
     std::string id, name, affiliation, solved;
     std::set<std::string> solved_list;
@@ -80,7 +85,7 @@ User parse_4_user(std::string xml)
         std::getline(ss, str, '\n');            \
     }                                           \
 
-std::set<User> parse_4_users(std::string xml)
+std::set<User> parse4Users(std::string xml)
 {
     std::set<User> users;
 
@@ -91,68 +96,68 @@ std::set<User> parse_4_users(std::string xml)
         if (str == "<id>") {
             User user;
             readLine(1, ss, str) // str := ID
-            user.set_id(str);
+            user.setID(str);
 
             readLine(3, ss, str) // str := Name
-            user.set_name(str);
+            user.setName(str);
 
             readLine(3, ss, str) // str := Affiliation
-            user.set_affiliation(str);
+            user.setAffiliation(str);
 
             readLine(3, ss, str) // str := solved
-            user.set_solved(str);
+            user.setSolved(str);
 
-            std::set<std::string> problist
-                = get_problist(user.get_id());
+            std::set<std::string> probList
+                = getProbList(user.getID());
 
-            user.set_solvedlist(problist);
+            user.setSolvedList(probList);
             users.insert(user);
 
-            sleep(1);
+            sleep(1);            
         }
     }
     return users;
 }
 
 // All User List (Rank List) Search API in AOJ.
-std::set<User> all_userlist_search_API(std::string affiliation,
-                                       std::string criteria,
-                                       std::string solved_min,
-                                       std::string solved_max)
+std::set<User> allUserListSearchAPI(std::string affiliation,
+                                    std::string criteria,
+                                    std::string solved_min,
+                                    std::string solved_max)
 {
     std::string url
         = "http://judge.u-aizu.ac.jp/onlinejudge/webservice/user_list?";
 
-    bool used_field = 0;
+    bool usedField = 0;
 
     if (!affiliation.empty()) {
         url += "affiliation=" + affiliation;
-        used_field = 1;
+        usedField = 1;
     }
 
     if (!criteria.empty()) {
-        url += (used_field ? "&" : "");
+        url += (usedField ? "&" : "");
         url += "criteria=" + criteria;
-        used_field = 1;
+        usedField = 1;
     }
 
     if (!solved_min.empty()) {
-        url += (used_field ? "&" : "");
+        url += (usedField ? "&" : "");
         url += "solved_min=" + solved_min;
-        used_field = 1;
+        usedField = 1;
     }
 
     if (!solved_max.empty()) {
-        url += (used_field ? "&" : "");
+        url += (usedField ? "&" : "");
         url += "solved_max=" + solved_max;
     }
 
     std::string xml = query(url);
-    std::set<User> users = parse_4_users(xml);
+    std::set<User> users = parse4Users(xml);
 
     auto display = [=](){
         for (auto user : users) {
-            user.display_user_info();
+            user.displayInfo();
             std::cout << std::endl;
         }
     };
@@ -166,7 +171,7 @@ std::set<User> all_userlist_search_API(std::string affiliation,
 #define OFFSET   50      // The offset of the number of solved.
 #define RATE    0.7      // The rate of whether two users are similar or not.
 
-std::set<User> get_similar_users(User user)
+std::set<User> getSimilarUsers(User user)
 {
     auto s2i = [](std::string s){
         std::stringstream ss; ss << s;
@@ -180,20 +185,20 @@ std::set<User> get_similar_users(User user)
         return s;
     };
 
-    std::string str = user.get_solved();
+    std::string str = user.getSolved();
     int solved = s2i(str);
     int min = std::max(MIN, solved - OFFSET);
     int max = std::min(MAX, solved + OFFSET);
 
-    std::set<User> users = all_userlist_search_API("", "", i2s(min), i2s(max));
+    std::set<User> users = allUserListSearchAPI("", "", i2s(min), i2s(max));
     std::set<User> sim_users;
 
     for (auto u : users) {
-        if (u.get_id() == user.get_id()) {
+        if (u.getID() == user.getID()) {
             continue;
         }
 
-        double diff_rate = difference_problems(user, u);
+        double diff_rate = differenceProblems(user, u);
         if (diff_rate >= RATE) {
             sim_users.insert(u);
         }
